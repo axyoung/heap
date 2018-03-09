@@ -13,6 +13,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <cstring>
 //#include "node.h"
 
 using namespace std;
@@ -20,7 +21,8 @@ using namespace std;
 int main () {
 
 	int tree[120];
-	
+	char numbers[120] = { 0 };
+
 	char entry[10];
 	cout << "This program creates a max heap to sort a list of numbers from largest to smallest." << endl;
 	cout << "Please choose to either enter numbers in manually [m] or with a file [f]." << endl;
@@ -33,15 +35,15 @@ int main () {
 		cin.get(fileName, sizeof(fileName));
 		cin.get();
 
-		ifstream infile(fileName);
+		ifstream inFile(fileName);
 
 		if (!inFile) {
-			cout << "Unable to open file " << fileName ".txt" << endl;
+			cout << "Unable to open file " << fileName << ".txt" << endl;
 			return 0;
 		}
 		
-		if (infile.is_open()) {
-			infline.getline(tree, 120, 0);
+		if (inFile.is_open()) {
+			inFile.getline(numbers, 120, 0);
 		}
 		
 		inFile.close();
@@ -52,8 +54,18 @@ int main () {
 		cout << "Type [QUIT] when your list is complete." << endl;
 
 		// read in list
+		// right now they type in 0 to quit
+		int count = 0;
+		while (count < 120) {
+			cin >> tree[count];
+			count++;
+		}
 	}
-
+	
+	// print
+	for (int i = 0; tree[i] != 0; i++) {
+		cout << tree[i] << ", ";
+	}
 
 
 
