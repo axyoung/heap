@@ -34,18 +34,28 @@ int main () {
 		cout << "Please enter the name of the file you wish to sort: ";
 		cin.get(fileName, sizeof(fileName));
 		cin.get();
+		//cout << fileName << endl;
+		ifstream inFile;
+		
+		inFile.open(fileName);
 
-		ifstream inFile(fileName);
-
-		if (!inFile) {
-			cout << "Unable to open file " << fileName << ".txt" << endl;
+		if (inFile.is_open()) {
+			cout << "Opening file..." << endl;
+			int x;
+			while (inFile >> x) {
+				//cout << x << endl;
+				//this doesn't work
+				for (int i = 0; tree[i] != 0; i++) {
+				       tree[i] = x;
+				}	
+			}
+		}
+		
+		else if (!inFile) {
+			cout << "Unable to open file " << fileName << endl;// << ".txt" << endl;
 			return 0;
 		}
-		
-		if (inFile.is_open()) {
-			inFile.getline(numbers, 120, 0);
-		}
-		
+
 		inFile.close();
 
 	} else {
@@ -63,8 +73,10 @@ int main () {
 	}
 	
 	// print
+	cout << "[Your List]";
+	
 	for (int i = 0; tree[i] != 0; i++) {
-		cout << tree[i] << ", ";
+		cout << "  " << tree[i];
 	}
 
 
